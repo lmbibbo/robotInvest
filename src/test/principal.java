@@ -20,6 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
@@ -46,10 +47,24 @@ public class principal {
 	}
 	
 	
-	private static void ej120() throws ClientProtocolException, IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpHost target = new HttpHost("www.pagina12.com.ar", 80, "http");
-        CloseableHttpResponse response;
+	private static void ej121() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private static CloseableHttpResponse getResponse(CloseableHttpClient httpclient, String host) {
+
+        CloseableHttpResponse response = null;
+        
         try {
         	DetectProxy detect = new DetectProxy();
             if (detect.isHasProxy()) {
@@ -63,25 +78,53 @@ public class principal {
 	            HttpGet request = new HttpGet("/");
 	            request.setConfig(config);
 	
+	            HttpHost target = new HttpHost(host, 80, "http");
 	            System.out.println("Executing request " + request.getRequestLine() + " to " + target + " via " + proxy);
 	
-	            response = httpclient.execute(target, request);
+	            try {
+					response = httpclient.execute(target, request);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }            
             else {
             	System.out.println("NOO  Tiene Proxy");
-            	response = httpclient.execute(new HttpGet(target.getHostName()));
+            	try {
+					response = httpclient.execute(new HttpGet(host));
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
-            try {
-                System.out.println("----------------------------------------");
-                System.out.println(response.getStatusLine());
-                System.out.println(EntityUtils.toString(response.getEntity()));
-            } finally {
-                response.close();
-            }
+
+        }finally {
+			
+		}
+        
+        return response;
+	}
+	
+	private static void ej120() throws ParseException, IOException {
+        
+        CloseableHttpClient httpclient = HttpClients.createDefault();       
+        CloseableHttpResponse response= getResponse(httpclient, "www.pagina12.com.ar");
+        
+        try {
+            System.out.println("----------------------------------------");
+            System.out.println(response.getStatusLine());
+            System.out.println(EntityUtils.toString(response.getEntity()));
         } finally {
+            response.close();
             httpclient.close();
         }
-	}
+ 	}
 	
 	
 	private static void ej119() throws ClientProtocolException, IOException {
