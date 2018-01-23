@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.message.BasicHttpResponse;
@@ -21,10 +22,12 @@ import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
@@ -38,9 +41,48 @@ public class principal {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException  {
 		// TODO Auto-generated method stub
-		ej119();
+		ej120();
 
 	}
+	
+	
+	private static void ej120() throws ClientProtocolException, IOException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpHost target = new HttpHost("www.pagina12.com.ar", 80, "http");
+        CloseableHttpResponse response;
+        try {
+        	DetectProxy detect = new DetectProxy();
+            if (detect.isHasProxy()) {
+            	System.out.println("Tiene Proxy");
+
+	            HttpHost proxy = new HttpHost(detect.getHostProxy(), detect.getPort(), detect.getProxyType());
+	
+	            RequestConfig config = RequestConfig.custom()
+	                    .setProxy(proxy)
+	                    .build();
+	            HttpGet request = new HttpGet("/");
+	            request.setConfig(config);
+	
+	            System.out.println("Executing request " + request.getRequestLine() + " to " + target + " via " + proxy);
+	
+	            response = httpclient.execute(target, request);
+            }            
+            else {
+            	System.out.println("NOO  Tiene Proxy");
+            	response = httpclient.execute(new HttpGet(target.getHostName()));
+            }
+            try {
+                System.out.println("----------------------------------------");
+                System.out.println(response.getStatusLine());
+                System.out.println(EntityUtils.toString(response.getEntity()));
+            } finally {
+                response.close();
+            }
+        } finally {
+            httpclient.close();
+        }
+	}
+	
 	
 	private static void ej119() throws ClientProtocolException, IOException {
 		String url = "http://demo-api.primary.com.ar/login.html";
