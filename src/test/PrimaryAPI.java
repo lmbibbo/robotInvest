@@ -102,7 +102,13 @@ public class PrimaryAPI {
         String url = activeEndpoint+"/rest/instruments/details";
         return getUrl(url);
 	}
+
+	public String getInstrumentosDetail(String marketId, String symbol) {
+        String url = activeEndpoint+"/rest/instruments/detail?symbol="+marketId+"&marketId="+symbol;
+        return getUrl(url);
+	}
 	
+
 	private String getUrl(String url)  {
 
         String result = "nada";
