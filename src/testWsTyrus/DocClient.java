@@ -1,6 +1,17 @@
 package testWsTyrus;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import javax.websocket.ClientEndpointConfig;
+import javax.websocket.Endpoint;
+import javax.websocket.EndpointConfig;
+import javax.websocket.MessageHandler;
+import javax.websocket.Session;
+
+import org.glassfish.tyrus.client.ClientManager;
 
 public class DocClient {
     private static CountDownLatch messageLatch;
@@ -13,6 +24,7 @@ public class DocClient {
             final ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();
 
             ClientManager client = ClientManager.createClient();
+            
             client.connectToServer(new Endpoint() {
 
                 @Override
@@ -31,7 +43,7 @@ public class DocClient {
                         e.printStackTrace();
                     }
                 }
-            }, cec, new URI("ws://localhost:8025/websockets/echo"));
+            }, cec, new URI("ws://demo-api.primary.com.ar:8081/pbcp/"));
             messageLatch.await(100, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
