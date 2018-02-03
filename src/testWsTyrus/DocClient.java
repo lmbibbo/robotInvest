@@ -13,12 +13,17 @@ import javax.websocket.Session;
 
 import org.glassfish.tyrus.client.ClientManager;
 
+import test.PrimaryAPI;
+
 public class DocClient {
     private static CountDownLatch messageLatch;
     private static final String SENT_MESSAGE = "Hello World";
 
+    private static PrimaryAPI api;
+    
     public static void main(String [] args){
         try {
+    
             messageLatch = new CountDownLatch(1);
 
             final ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();
@@ -43,7 +48,7 @@ public class DocClient {
                         e.printStackTrace();
                     }
                 }
-            }, cec, new URI("ws://demo-api.primary.com.ar:8081/pbcp/"));
+            }, cec, new URI("ws://localhost:8025/websockets/echo"));
             messageLatch.await(100, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
