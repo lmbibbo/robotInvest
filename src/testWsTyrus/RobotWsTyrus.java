@@ -9,6 +9,8 @@ public class RobotWsTyrus {
 		miApi.login();
 		
 		miApi.connect();
+		
+
 	}
 
 }

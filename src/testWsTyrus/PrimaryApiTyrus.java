@@ -3,9 +3,11 @@ package testWsTyrus;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import javax.websocket.ClientEndpoint;
 import javax.websocket.ClientEndpointConfig;
 import javax.websocket.DeploymentException;
 import javax.websocket.Endpoint;
@@ -23,14 +25,14 @@ import test.PrimaryAPI;
 
 public class PrimaryApiTyrus {
 
-	private String	activeEndpoint = "wss://demo-api.primary.com.ar:8081/pbcp/";   
+	private String	activeEndpoint = "ws://localhost:8025/websockets/echo";   
 	private ClientEndpointConfig cec=ClientEndpointConfig.Builder.create().build();
     private ClientManager client = ClientManager.createClient();
     private PrimaryAPI api;
     private String SENT_MESSAGE = "Hello World";
     private CountDownLatch messageLatch;
 
-    
+     
 	public PrimaryApiTyrus() {
 		// TODO Auto-generated constructor stub
 		api = new PrimaryAPI();
@@ -58,7 +60,12 @@ public class PrimaryApiTyrus {
 		}
 		try {
             messageLatch = new CountDownLatch(1);
-          
+            
+            client.getProperties().put("X-Auth-Token", api.getToken());
+            client.getProperties().put("x-username", api.getUser());
+            client.getProperties().put("x-password", api.getPassword());
+            client.getProperties().put("cache-control", "no-cache");            
+           
 			client.connectToServer(new Endpoint() {
 
 				@Override

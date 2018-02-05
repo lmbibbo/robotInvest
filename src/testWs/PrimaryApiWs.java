@@ -1,25 +1,12 @@
 package testWs;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.http.HeaderElementIterator;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeaderElementIterator;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -37,12 +24,10 @@ public class PrimaryApiWs {
 	public PrimaryApiWs() {
 		// TODO Auto-generated constructor stub
 		api = new PrimaryAPI();
-
 	}
 
 	public void login() {
-    
-		if (! api.Islogin()) {
+ 		if (! api.Islogin()) {
 			api.login();
 		}
 	}
@@ -56,9 +41,7 @@ public class PrimaryApiWs {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
 	}
     
 	private void init() {
@@ -70,7 +53,6 @@ public class PrimaryApiWs {
 			e.printStackTrace();
 		}
 		
-
 		httpHeaders.put("x-username", api.getUser());
 		httpHeaders.put("x-password", api.getPassword());
 		httpHeaders.put("cache-control", "no-cache");
