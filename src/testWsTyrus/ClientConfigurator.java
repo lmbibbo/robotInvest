@@ -21,12 +21,12 @@ public class ClientConfigurator extends Configurator {
         	lista.add(miApi.getToken());
     		headers.put("X-Auth-Token", lista);
     		lista = new ArrayList<String>();
-    		lista.add(miApi.getUser());
-    		headers.put("x-username", lista);
-    		lista = new ArrayList<String>();
+    		lista.add(miApi.getJSESSIONID());
+    		headers.put("JSESSIONID", lista);
+/*    		lista = new ArrayList<String>();
     		lista.add(miApi.getPassword());
     		headers.put("x-password", lista);
-    		lista = new ArrayList<String>();
+*/    		lista = new ArrayList<String>();
     		lista.add("no-cache");
     		headers.put("cache-control", lista);
      	}

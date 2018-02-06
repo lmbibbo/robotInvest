@@ -2,6 +2,8 @@ package test;
 
 import java.io.IOException;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -26,6 +28,7 @@ public class PrimaryAPI {
 	private static String	activeEndpoint = "http://demo-api.primary.com.ar/";
 	private String	account = "";
 	private String	token = "";
+	private String	JsessionId = "";
 	private Boolean	verifyHTTPs = false;
 	
 	private static String	marketID="ROFX";
@@ -59,27 +62,37 @@ public class PrimaryAPI {
 
 	public void login() {
 
-        try {
-    		if (! islogin) {
-    			
-    			HttpPost post = new HttpPost("http://demo-api.primary.com.ar/auth/getToken");
-    			post.addHeader("x-username", user);
-    	    	post.addHeader("x-password", password);
-    	    	post.addHeader("cache-control", "no-cache");
-    	    	
-    			response = httpclient.execute(post, clientContext);
-    	        
-    	        HeaderElementIterator it = new BasicHeaderElementIterator(
-    	        	    response.headerIterator("X-Auth-Token"));
+		try {
+			if (! islogin) {
 
-    	        while (it.hasNext()) {
-    	        	token=it.nextElement().getName();
-    	            islogin=true;
-    	        }
-    	        
-    		}
-        	
-        } catch (ClientProtocolException e) {
+				HttpPost post = new HttpPost("http://demo-api.primary.com.ar/auth/getToken");
+				post.addHeader("x-username", user);
+				post.addHeader("x-password", password);
+				post.addHeader("cache-control", "no-cache");
+
+				response = httpclient.execute(post, clientContext);
+
+				Header[] hedXAuth = response.getHeaders("X-Auth-Token");
+				if (hedXAuth.length > 0) {
+					token=hedXAuth[0].getValue();
+					islogin=true;
+				}
+
+				HeaderElementIterator it = new BasicHeaderElementIterator(
+						response.headerIterator());
+
+				while (it.hasNext()) {
+					HeaderElement el=it.nextElement();
+
+					if (el.getName().equals("JSESSIONID")) {
+						JsessionId=el.getValue();
+					}
+
+				}
+
+			}
+
+		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -157,6 +170,10 @@ public class PrimaryAPI {
 
 	public String getToken() {
 		return token;
+	}
+
+	public String getJSESSIONID() {
+		return JsessionId;
 	}
 
 	public String getUser() {
