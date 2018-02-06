@@ -45,7 +45,7 @@ public class DocClient {
 //            cec.getUserProperties().put("cache-control", "no-cache");
    
             ClientManager client = ClientManager.createClient();
-            client.getProperties().put(ClientProperties.PROXY_URI, "http://127.0.0.1:8010");
+//            client.getProperties().put(ClientProperties.PROXY_URI, "http://127.0.0.1:8010");
             
             client.connectToServer(new Endpoint() {
 
@@ -67,6 +67,8 @@ public class DocClient {
                 }
             }, cec, new URI("ws://demo-api.primary.com.ar/"));
             messageLatch.await(100, TimeUnit.SECONDS);
+            
+            System.out.println(client.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
