@@ -13,8 +13,13 @@ import javax.websocket.server.ServerEndpoint;
 public class EchoEndpoint {
 
     @OnOpen
-    public void onOpen(Session session) throws IOException {
-        session.getBasicRemote().sendText("onOpen");
+    public void onOpen(Session session) {
+        try {
+			session.getBasicRemote().sendText("Conected ...");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @OnMessage
