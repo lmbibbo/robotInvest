@@ -2,28 +2,25 @@ package testWsTyrus;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import javax.websocket.ClientEndpointConfig;
 import javax.websocket.ClientEndpointConfig.Configurator;
-import javax.websocket.Decoder;
-import javax.websocket.Encoder;
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
-import javax.websocket.Extension;
 import javax.websocket.MessageHandler;
 import javax.websocket.Session;
 
 import org.glassfish.tyrus.client.ClientManager;
 import org.glassfish.tyrus.client.ClientProperties;
+import org.glassfish.tyrus.container.grizzly.client.GrizzlyClientSocket;
 
 public class DocClient {
     private static CountDownLatch messageLatch;
     private static final String SENT_MESSAGE = "Hello World";
-    
+	private static String	activeEndpoint = "ws://localhost:8025/websockets/echo";   
+//	private static String	activeEndpoint = "ws://demo-api.primary.com.ar/";      
 
     public static void main(String [] args){
     	
@@ -37,15 +34,15 @@ public class DocClient {
             final ClientEndpointConfig cec = ClientEndpointConfig
             		.Builder
             		.create()
-            		.configurator(miClientEndpointConfig)
+//            		.configurator(miClientEndpointConfig)
             		.build();
             
-//            cec.getUserProperties().put("x-username", "user5");
-//            cec.getUserProperties().put("x-password", "password");
-//            cec.getUserProperties().put("cache-control", "no-cache");
-   
             ClientManager client = ClientManager.createClient();
+            
 //            client.getProperties().put(ClientProperties.PROXY_URI, "http://127.0.0.1:8010");
+//            client.getProperties().put(ClientProperties.LOG_HTTP_UPGRADE, true);
+            
+//            client.getProperties().put(GrizzlyClientSocket.PROXY_URI, "http://127.0.0.1:8010");
             
             client.connectToServer(new Endpoint() {
 
@@ -65,7 +62,7 @@ public class DocClient {
                         e.printStackTrace();
                     }
                 }
-            }, cec, new URI("ws://demo-api.primary.com.ar/"));
+            }, cec, new URI(activeEndpoint));
             messageLatch.await(100, TimeUnit.SECONDS);
             
             System.out.println(client.toString());
