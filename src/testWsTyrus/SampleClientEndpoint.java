@@ -18,7 +18,9 @@ public class SampleClientEndpoint {
 	@OnOpen
 	public void onOpen(Session p) {
 		try {
-			p.getBasicRemote().sendText("Hello!");
+		    String SENT_MESSAGE = "{\"type\":\"smd\",\"level\":1, \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"DONov18\",\"marketId\":\"ROFX\"}]}";
+		   
+			p.getBasicRemote().sendText(SENT_MESSAGE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

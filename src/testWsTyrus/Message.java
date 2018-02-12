@@ -1,25 +1,39 @@
 package testWsTyrus;
 
+import java.util.List;
+
 public class Message {
 
 	public static final String PREFIX = null;
 
-	private String subject;
-	private String content;
-
-	public String getSubject() {
-		return subject;
+	private String type;
+	private String level;
+	private List <String> entries;
+	private List <Products> products;
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public List<String> getEntries() {
+		return entries;
+	}
+	public void setEntries(List<String> entries) {
+		this.entries = entries;
+	}
+	public List<Products> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Products> products) {
+		this.products = products;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
 }

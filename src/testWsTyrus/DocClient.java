@@ -21,9 +21,9 @@ import org.glassfish.tyrus.container.grizzly.client.GrizzlyClientSocket;
 
 public class DocClient {
     private static CountDownLatch messageLatch;
-    private static final String SENT_MESSAGE = "{\"type\":\"Md\",\"instrumentId\":{\"marketId\":\"ROFX\",\"symbol\":\"DONov18\"},\"marketData\":{\"BI\":[{\"price\":22.700,\"size\":500}],\"OF\":[{\"price\":22.900,\"size\":500}]}}";
-	private static String	activeEndpoint = "ws://localhost:8025/websockets/echo";   
-//	private static String	activeEndpoint = "ws://demo-api.primary.com.ar/";      
+    private static final String SENT_MESSAGE = "{type:Md,instrumentId:{marketId:ROFX,symbol:DONov18},marketData:{BI:[{price:22.700,size:500}],OF:[{price:22.900,size:500}]}}";
+//	private static String	activeEndpoint = "ws://localhost:8025/websockets/echo";   
+	private static String	activeEndpoint = "ws://demo-api.primary.com.ar/";      
 
     public static void main(String [] args){
     	
@@ -37,7 +37,7 @@ public class DocClient {
             final ClientEndpointConfig cec = ClientEndpointConfig
             		.Builder
             		.create()
-//            		.configurator(miClientEndpointConfig)
+            		.configurator(miClientEndpointConfig)
             		.build();
             
             ClientManager client = ClientManager.createClient();
@@ -47,51 +47,9 @@ public class DocClient {
             
 //            client.getProperties().put(GrizzlyClientSocket.PROXY_URI, "http://127.0.0.1:8010");
             
-            client.connectToServer(MiEndpoint.class, cec, new URI(activeEndpoint));
-         /*   
-            
-            client.connectToServer(new Endpoint() {
-            	 /*
-            	@OnOpen
-                public void onOpen(Session session, EndpointConfig config) {
-            	       try {
-            			session.getBasicRemote().sendText(SENT_MESSAGE);
-            		} catch (IOException e) {
-            			// TODO Auto-generated catch block
-            			e.printStackTrace();
-            		}
-            	}
-            	
-            	@OnMessage
-            	public void onMessage(String message) {
-            		System.out.println(String.format("%s %s", "Received message: ", message));
-                    messageLatch.countDown();
-            	}
-            	
-            	@OnError
-            	public void processError(Throwable t) {
-            		t.printStackTrace();
-            	}
-               
-            	@Override
-                public void onOpen(Session session, EndpointConfig config) {
-                    try {
-                        session.addMessageHandler(new MessageHandler.Whole<String>() {
+            client.connectToServer(SampleClientEndpoint.class, new URI(activeEndpoint));
 
-                            @Override
-                            public void onMessage(String message) {
-                                System.out.println("Received message: "+message);
-                                messageLatch.countDown();
-                            }
-                        });
-                        session.getBasicRemote().sendText(SENT_MESSAGE);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, cec, new URI(activeEndpoint));*/
-
-            messageLatch.await(100, TimeUnit.SECONDS);
+            messageLatch.await(50, TimeUnit.SECONDS);
             
             System.out.println(client.toString());
         } catch (Exception e) {

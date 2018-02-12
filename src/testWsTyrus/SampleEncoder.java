@@ -12,8 +12,8 @@ public class SampleEncoder implements Encoder.Text<Message> {
 	  public String encode(Message message) throws EncodeException {
 
 	    JsonObject jsonObject = Json.createObjectBuilder()
-	        .add("subject", message.getSubject())
-	        .add("content", message.getContent()).build();
+	        .add("type", message.getType())
+	        .add("level", message.getLevel()).build();
 	    return jsonObject.toString();
 
 	  }
