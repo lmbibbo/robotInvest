@@ -13,7 +13,9 @@ public class SampleEncoder implements Encoder.Text<Message> {
 
 	    JsonObject jsonObject = Json.createObjectBuilder()
 	        .add("type", message.getType())
-	        .add("level", message.getLevel()).build();
+	        .add("level", message.getLevel())
+	        .add("entries", Json.createArrayBuilder())
+	        .build();
 	    return jsonObject.toString();
 
 	  }

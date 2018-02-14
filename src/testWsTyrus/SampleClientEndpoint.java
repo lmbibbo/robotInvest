@@ -8,6 +8,10 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @ClientEndpoint(
 		decoders = SampleDecoder.class,
 		encoders = SampleEncoder.class,
@@ -29,6 +33,23 @@ public class SampleClientEndpoint {
 	@OnMessage
 	public void onMessage(String message) {
 		System.out.println(String.format("%s %s", "Received message: ", message));
+		ObjectMapper objectMapper = new ObjectMapper();
+				
+		try {
+			Answer resp = objectMapper.readValue(message, Answer.class);
+
+			System.out.println(objectMapper.writeValueAsString(resp));
+			
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@OnError

@@ -17,4 +17,10 @@ public class Products {
 	public void setMarketId(String marketId) {
 		this.marketId = marketId;
 	}
+    
+	@Override
+    public String toString()
+    {
+        return "ClassPojo [marketId = "+marketId+", symbol = "+symbol+"]";
+    }
 }
