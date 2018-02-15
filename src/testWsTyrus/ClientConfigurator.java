@@ -22,7 +22,7 @@ public class ClientConfigurator extends Configurator {
 			if (null == cookieList) {
 				cookieList = new ArrayList<>();
 			}
-			cookieList.add("JSESSIONID="+miApi.getJSESSIONID());     // set your cookie value here
+			cookieList.add("JSESSIONID="+miApi.getJSESSIONID());    
 			headers.put("Cookie", cookieList);
 
 		}

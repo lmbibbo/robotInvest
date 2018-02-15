@@ -12,7 +12,6 @@ import org.glassfish.tyrus.client.ClientManager;
 public class DocClient {
     private static CountDownLatch messageLatch;
 
-    private static final String SENT_MESSAGE = "{type:Md,instrumentId:{marketId:ROFX,symbol:DONov18},marketData:{BI:[{price:22.700,size:500}],OF:[{price:22.900,size:500}]}}";
 //	private static String	activeEndpoint = "ws://localhost:8025/websockets/echo";   
 	private static String	activeEndpoint = "ws://demo-api.primary.com.ar/";      
 
@@ -38,7 +37,7 @@ public class DocClient {
           
             client.connectToServer(SampleClientEndpoint.class, new URI(activeEndpoint));
 
-            messageLatch.await(50, TimeUnit.SECONDS);
+            messageLatch.await(10, TimeUnit.MINUTES);
             
             System.out.println(client.toString());
         } catch (Exception e) {

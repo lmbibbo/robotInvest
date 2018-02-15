@@ -13,16 +13,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ClientEndpoint(
-		decoders = SampleDecoder.class,
-		encoders = SampleEncoder.class,
-		subprotocols = {"subprtotocol1", "subprotocol2"},
 		configurator = ClientConfigurator.class)
 public class SampleClientEndpoint {
 
 	@OnOpen
 	public void onOpen(Session p) {
 		try {
-		    String SENT_MESSAGE = "{\"type\":\"smd\",\"level\":1, \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"DONov18\",\"marketId\":\"ROFX\"}]}";
+		    String SENT_MESSAGE = "{\"type\":\"smd\",\"level\":1, \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"OROMar18\",\"marketId\":\"ROFX\"}]}";
 		   
 			p.getBasicRemote().sendText(SENT_MESSAGE);
 		} catch (IOException e) {
@@ -32,13 +29,13 @@ public class SampleClientEndpoint {
 
 	@OnMessage
 	public void onMessage(String message) {
-		System.out.println(String.format("%s %s", "Received message: ", message));
+//		System.out.println(String.format("%s %s", "Received message: ", message));
 		ObjectMapper objectMapper = new ObjectMapper();
 				
 		try {
 			Answer resp = objectMapper.readValue(message, Answer.class);
 
-			System.out.println(objectMapper.writeValueAsString(resp));
+			System.out.println(System.currentTimeMillis()+" <- "+objectMapper.writeValueAsString(resp));
 			
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
