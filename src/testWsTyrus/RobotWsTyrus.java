@@ -6,10 +6,7 @@ public class RobotWsTyrus {
 		// TODO Auto-generated method stub
 		PrimaryApiTyrus miApi= new PrimaryApiTyrus();
 		
-		miApi.login();
-		
 		miApi.connect();
-		
 
 	}
 
