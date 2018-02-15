@@ -3,6 +3,7 @@ package testWsTyrus;
 import java.io.StringReader;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
@@ -16,10 +17,12 @@ public class SampleDecoder implements Decoder.Text<Message> {
 	    JsonObject jsonObject = Json
 	        .createReader(new StringReader(jsonMessage)).readObject();
 	    Message message = new Message();
-	    message.setSubject(jsonObject.getString("subject"));
-	    message.setContent(jsonObject.getString("content"));
-	    return message;
+	    
+	    message.setType(jsonObject.getString("type"));
+	    message.setLevel(jsonObject.getInt("level"));
 
+
+	    return message;
 	  }
 
 	  @Override

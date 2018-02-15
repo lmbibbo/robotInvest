@@ -31,6 +31,8 @@ public class ClientConfigurator extends Configurator {
 
     public void afterResponse(HandshakeResponse hr) {
         //process the handshake response
-    	System.out.println(hr.toString());
+    	System.out.println(hr.getHeaders().toString());
+    	
+    	
     }
 }
