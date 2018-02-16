@@ -1,10 +1,5 @@
 package testWsTyrus;
 
-import java.io.StringReader;
-
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
@@ -14,26 +9,14 @@ public class SampleDecoder implements Decoder.Text<Message> {
 	  @Override
 	  public Message decode(String jsonMessage) throws DecodeException {
 
-	    JsonObject jsonObject = Json
-	        .createReader(new StringReader(jsonMessage)).readObject();
 	    Message message = new Message();
-	    
-	    message.setType(jsonObject.getString("type"));
-	    message.setLevel(jsonObject.getInt("level"));
-
 
 	    return message;
 	  }
 
 	  @Override
 	  public boolean willDecode(String jsonMessage) {
-	    try {
-	      // Check if incoming message is valid JSON
-	      Json.createReader(new StringReader(jsonMessage)).readObject();
 	      return true;
-	    } catch (Exception e) {
-	      return false;
-	    }
 	  }
 
 	  @Override
