@@ -8,6 +8,7 @@ public class MarketData {
 	
 	private ArrayList<Values> bi = null;
 	private ArrayList<Values> of = null;
+
 	public ArrayList<Values> getBi() {
 		return bi;
 	}

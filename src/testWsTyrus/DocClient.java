@@ -21,15 +21,7 @@ public class DocClient {
     	try {
     
     		messageLatch = new CountDownLatch(1);
-
-    		Configurator miClientEndpointConfig = new ClientConfigurator();
-
-            final ClientEndpointConfig cec = ClientEndpointConfig
-            		.Builder
-            		.create()
-            		.configurator(miClientEndpointConfig)
-            		.build();
-            
+         
             ClientManager client = ClientManager.createClient();
             
 //            client.getProperties().put(ClientProperties.PROXY_URI, "http://127.0.0.1:8010");

@@ -5,6 +5,7 @@ public class Answer {
 	private String type = null;
 	private Products instrumentId = null;
 	private MarketData marketData = null;
+
 	public String getType() {
 		return type;
 	}
