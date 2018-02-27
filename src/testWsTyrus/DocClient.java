@@ -4,9 +4,6 @@ import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.websocket.ClientEndpointConfig;
-import javax.websocket.ClientEndpointConfig.Configurator;
-
 import org.glassfish.tyrus.client.ClientManager;
 
 public class DocClient {
