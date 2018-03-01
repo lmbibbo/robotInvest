@@ -7,7 +7,5 @@ public class RobotWsTyrus {
 		PrimaryApiTyrus miApi= new PrimaryApiTyrus();
 		
 		miApi.connect();
-
 	}
-
 }

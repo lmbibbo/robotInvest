@@ -12,6 +12,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,7 +22,10 @@ public class SampleClientEndpoint {
 
 	@OnOpen
 	public void onOpen(Session p) {
+		
+		ArrayList<Call> llamados = new ArrayList<Call>();
 		List<String> futuros = new ArrayList<String>();
+		ObjectMapper objectMapper = new ObjectMapper();
 		
 		futuros.add("DOMar18");
 		futuros.add("DOAbr18");
@@ -32,17 +36,19 @@ public class SampleClientEndpoint {
 		futuros.add("OROMay18");
 		futuros.add("OROJul18");
 
-		
-		String STR1 = "{\"type\":\"smd\",\"level\":1, \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"";
-				
-		String STR2 = "\",\"marketId\":\"ROFX\"}]}";
-
 		Iterator<String> nombreIterator = futuros.iterator();
 		while(nombreIterator.hasNext()){
 			String elemento = nombreIterator.next();
-//			System.out.println(STR1+elemento+STR2);
+
+			Call elem = new Call();
+			elem.getProducts().add(new Products(elemento));
+
 			try {
-				p.getBasicRemote().sendText(STR1+elemento+STR2);
+				System.out.println(objectMapper.writeValueAsString(elem));
+				p.getBasicRemote().sendText(objectMapper.writeValueAsString(elem));
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,7 +58,7 @@ public class SampleClientEndpoint {
 
 	@OnMessage
 	public void onMessage(String message) {
-//		System.out.println(String.format("%s %s", "Received message: ", message));
+
 		ObjectMapper objectMapper = new ObjectMapper();
 				
 		try {
