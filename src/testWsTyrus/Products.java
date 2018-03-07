@@ -2,6 +2,12 @@ package testWsTyrus;
 
 public class Products {
 
+	public Products(String symbol) {
+		super();
+		this.symbol = symbol;
+		this.marketId = "ROFX";
+	}
+
 	private String symbol;
 	private String marketId;
 	

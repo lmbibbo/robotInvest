@@ -24,7 +24,6 @@ public class ClientConfigurator extends Configurator {
 			}
 			cookieList.add("JSESSIONID="+miApi.getJSESSIONID());    
 			headers.put("Cookie", cookieList);
-
 		}
 		System.out.println(headers.toString());
 	}
@@ -32,7 +31,5 @@ public class ClientConfigurator extends Configurator {
     public void afterResponse(HandshakeResponse hr) {
         //process the handshake response
     	System.out.println(hr.getHeaders().toString());
-    	
-    	
     }
 }
