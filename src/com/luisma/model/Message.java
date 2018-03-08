@@ -1,4 +1,4 @@
-package testWsTyrus;
+package com.luisma.model;
 
 import java.util.List;
 
