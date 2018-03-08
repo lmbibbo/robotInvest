@@ -68,7 +68,7 @@ class View implements java.util.Observer {
 	public void update(Observable obs, Object obj) {
 
 		//who called us and what did they send?
-		//System.out.println ("View      : Observable is " + obs.getClass() + ", object passed is " + obj.getClass());
+		System.out.println ("View      : Observable is " + obs.getClass() + ", object passed is " + obj.getClass());
 
 		//model Pull 
 		//ignore obj and ask model for value, 
@@ -78,6 +78,9 @@ class View implements java.util.Observer {
 
 		//model Push 
 		//parse obj
+		System.out.println ("Name object passed is " + obj.getClass().getName());
+			
+		
 		myTextField.setText("" + ((Integer)obj).intValue());	//obj is an Object, need to cast to an Integer
 
 	} //update()
