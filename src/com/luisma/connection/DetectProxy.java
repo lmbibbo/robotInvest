@@ -1,4 +1,4 @@
-package test;
+package com.luisma.connection;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;

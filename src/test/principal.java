@@ -35,6 +35,8 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.luisma.connection.DetectProxy;
+
 public class principal {
 
 	private final static String USER_AGENT = "Mozilla/5.0";
