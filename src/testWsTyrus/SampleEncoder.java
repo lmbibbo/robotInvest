@@ -4,6 +4,8 @@ import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
+import com.luisma.model.Message;
+
 public class SampleEncoder implements Encoder.Text<Message> {
 
 	  @Override

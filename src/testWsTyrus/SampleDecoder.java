@@ -4,6 +4,8 @@ import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
+import com.luisma.model.Message;
+
 public class SampleDecoder implements Decoder.Text<Message> {
 
 	  @Override

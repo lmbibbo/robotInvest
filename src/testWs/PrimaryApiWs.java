@@ -11,8 +11,8 @@ import java.util.Map;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import test.DetectProxy;
-import test.PrimaryAPI;
+import com.luisma.connection.DetectProxy;
+import com.luisma.connection.PrimaryAPI;
 
 public class PrimaryApiWs {
 

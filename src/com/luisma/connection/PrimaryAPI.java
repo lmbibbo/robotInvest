@@ -1,4 +1,4 @@
-package test;
+package com.luisma.connection;
 
 import java.io.IOException;
 

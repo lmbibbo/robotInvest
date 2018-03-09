@@ -12,9 +12,11 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luisma.model.Answer;
+import com.luisma.model.Call;
+import com.luisma.model.Products;
 
 @ClientEndpoint(
 		configurator = ClientConfigurator.class)
@@ -76,6 +78,8 @@ public class SampleClientEndpoint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+//		System.out.println(message);
 	}
 	
 	@OnError
