@@ -1,5 +1,7 @@
 package testSwing;
 
+import com.luisma.view.CheckboxListItem;
+
 public class Controller {
 	private Model model;
 	private View view;
@@ -35,15 +37,25 @@ public class Controller {
 		view.getConect().addActionListener(e -> decrementValue());
 	}
 
+	private Object chequed() {
+		
+		
+		System.out.println("Controller: CheckBox chequed: ");	
+		return null;
+	}
+
 	private Object decrementValue() {
 		model.decrementValue();
 		view.getMyTextField().setText(String.valueOf(model.getCounter()));
+		view.getMylist().getList().setEnabled(true);
+		view.getMylist().getModel().addElement(new CheckboxListItem("Otro Mas"));
 		return null;
 	}
 
 	private Object incrementValue() {
 		model.incrementValue();
 		view.getMyTextField().setText(String.valueOf(model.getCounter()));
+		view.getMylist().getList().setEnabled(false);
 		return null;
 	}
 }
