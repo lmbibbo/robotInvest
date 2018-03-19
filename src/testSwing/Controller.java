@@ -75,8 +75,6 @@ public class Controller {
 			for(int i=0; i<s; i++){
 				view.getMylist().getModel().addElement(new CheckboxListItem(resp.getInstruments().get(i).getInstrumentId().getSymbol()));
 			}
-			
-			
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
