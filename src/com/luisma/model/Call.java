@@ -7,18 +7,18 @@ public class Call {
 	private String type = null;
 	private int level = 1;
 	private ArrayList<String> entries = null;
-	private ArrayList<Products> products = null;
+	private ArrayList<Product> products = null;
 	
 	public Call() {
 		ArrayList<String> entr= new ArrayList<String>();
 		entr.add("BI");
 		entr.add("OF");
-		ArrayList<Products> prod=new ArrayList<Products>();
+		ArrayList<Product> prod=new ArrayList<Product>();
 		
 		this.init("smd", 1, entr, prod );
 	}
 	
-	private void init(String type, int level, ArrayList<String> entries, ArrayList<Products> products) {
+	private void init(String type, int level, ArrayList<String> entries, ArrayList<Product> products) {
 		this.type = type;
 		this.level = level;
 		this.entries = entries;
@@ -43,10 +43,10 @@ public class Call {
 	public void setEntries(ArrayList<String> entries) {
 		this.entries = entries;
 	}
-	public ArrayList<Products> getProducts() {
+	public ArrayList<Product> getProducts() {
 		return products;
 	}
-	public void setProducts(ArrayList<Products> products) {
+	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
 }

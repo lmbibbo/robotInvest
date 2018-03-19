@@ -1,17 +1,10 @@
 package com.luisma.view;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Label;
-import java.awt.TextField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import testSwing.View.CloseListener;
 import javax.swing.JSplitPane;
 
 public class MiView {

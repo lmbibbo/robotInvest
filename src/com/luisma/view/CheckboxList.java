@@ -3,12 +3,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class CheckboxList {
 

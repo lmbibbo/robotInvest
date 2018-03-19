@@ -1,16 +1,27 @@
 package testSwing;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luisma.connection.PrimaryAPI;
+import com.luisma.model.Answer;
+import com.luisma.model.AnswerInstruments;
 import com.luisma.view.CheckboxListItem;
 
 public class Controller {
 	private Model model;
 	private View view;
+	private PrimaryAPI miApi;
+	
 
 	public Controller(Model m, View v) {
 		addModel(m);
 		addView(v);
 		initModel(1);
 		initView();
+		miApi = new PrimaryAPI();
 	}
 
 	public void addModel(Model m){
@@ -34,7 +45,7 @@ public class Controller {
 
 	public void initController() {
 		view.getButton().addActionListener(e -> incrementValue());
-		view.getConect().addActionListener(e -> decrementValue());
+		view.getConect().addActionListener(e -> connect());
 	}
 
 	private Object chequed() {
@@ -48,8 +59,38 @@ public class Controller {
 		model.decrementValue();
 		view.getMyTextField().setText(String.valueOf(model.getCounter()));
 		view.getMylist().getList().setEnabled(true);
-		view.getMylist().getModel().addElement(new CheckboxListItem("Otro Mas"));
 		return null;
+	}
+	
+	private void connect() {
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		miApi.login();
+		try {
+			AnswerInstruments resp = objectMapper.readValue(miApi.getInstrumentos(), AnswerInstruments.class);
+			System.out.println(System.currentTimeMillis()+" <- "+objectMapper.writeValueAsString(resp));
+			
+			int s = resp.getInstruments().size();
+			for(int i=0; i<s; i++){
+				view.getMylist().getModel().addElement(new CheckboxListItem(resp.getInstruments().get(i).getInstrumentId().getSymbol()));
+			}
+			
+			
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		view.getConect().setEnabled(false);
 	}
 
 	private Object incrementValue() {

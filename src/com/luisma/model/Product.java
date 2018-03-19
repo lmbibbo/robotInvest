@@ -1,16 +1,16 @@
 package com.luisma.model;
 
-public class Products {
+public class Product {
 
 	private String symbol;
 	private String marketId;
 
-	public Products(String symbol) {
+	public Product(String symbol) {
 		this.symbol = symbol;
 		this.marketId = "ROFX";
 	}
 
-	public Products() {
+	public Product() {
 	}
 	
 	public String getSymbol() {

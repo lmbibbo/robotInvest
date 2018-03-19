@@ -2,24 +2,22 @@ package TestSwingTyrus;
 //View.java
 //(C) Joseph Mack 2011, jmack (at) wm7d (dot) net, released under GPL v3 (or any later version)
 
+import java.awt.BorderLayout;
+
 //inspired by Joseph Bergin's MVC gui at http://csis.pace.edu/~bergin/mvc/mvcgui.html
 
 //View is an Observer
 
 import java.awt.Button;
-import java.awt.Panel;
-import java.awt.Frame;
-import java.awt.TextField;
 import java.awt.Label;
-import java.awt.event.WindowEvent;	//for CloseListener()
+import java.awt.TextField;
 import java.awt.event.WindowAdapter;	//for CloseListener()
-import java.lang.Integer;		//int from Model is passed as an Integer
+import java.awt.event.WindowEvent;	//for CloseListener()
 import java.util.Observable;
-import javax.swing.JCheckBox;		//for update();
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 
 class View implements java.util.Observer {
 

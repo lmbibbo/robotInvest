@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luisma.model.Answer;
 import com.luisma.model.Call;
-import com.luisma.model.Products;
+import com.luisma.model.Product;
 
 @ClientEndpoint(
 		configurator = ClientConfigurator.class)
@@ -43,7 +43,7 @@ public class SampleClientEndpoint {
 			String elemento = nombreIterator.next();
 
 			Call elem = new Call();
-			elem.getProducts().add(new Products(elemento));
+			elem.getProducts().add(new Product(elemento));
 
 			try {
 				System.out.println(objectMapper.writeValueAsString(elem));

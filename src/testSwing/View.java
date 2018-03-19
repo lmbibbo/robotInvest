@@ -4,20 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Label;
 import java.awt.TextField;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
 
 import com.luisma.view.CheckboxList;
 import com.luisma.view.CheckboxListItem;
-import com.luisma.view.CheckboxListRenderer;
 
 public class View {
 
@@ -29,10 +23,6 @@ public class View {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private CheckboxList mylist;
-
-	final   String[] listData = {"Appleeee", "Orange", "Cherry", "Blue Berry", "Banana", "Red Plum", "Watermelon"};
-	//private Model model;		//Joe: Model is hardwired in, 
-	//needed only if view initialises model (which we aren't doing)
 
 	View() {
 		System.out.println("View()");	
@@ -51,11 +41,6 @@ public class View {
 
 		mylist = new CheckboxList();
 	
-		int s = listData.length;
-		for(int i=0; i<s; i++){
-			mylist.getModel().addElement(new CheckboxListItem(listData[i]));
-		}
-
 		panel_2.add(mylist.getList(), BorderLayout.CENTER);
 		panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.CENTER);

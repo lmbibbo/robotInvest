@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.websocket.ClientEndpointConfig.Configurator;
+import javax.websocket.HandshakeResponse;
 
 import com.luisma.connection.PrimaryAPI;
-
-import javax.websocket.HandshakeResponse;
 
 public class ClientConfigurator extends Configurator {
 
