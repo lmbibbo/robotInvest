@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 
 import com.luisma.view.CheckboxList;
 import com.luisma.view.CheckboxListItem;
@@ -24,10 +25,15 @@ public class TopPanel extends JPanel {
 		mylist = new CheckboxList();
 		JScrollPane listScrollPane = new JScrollPane(mylist.getList());
 		
-		JPanel pictureScrollPane = new JPanel();
 		
-		pictureScrollPane.add(myTextField, BorderLayout.CENTER);
-		
+		JPanel otro = new JPanel();
+        otro.add(myTextField, BorderLayout.NORTH);
+        
+        JTable table = new JTable(new MyTableModel());
+        otro.add(table, BorderLayout.CENTER);
+        
+		JScrollPane pictureScrollPane = new JScrollPane(otro);
+        
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				listScrollPane, pictureScrollPane);
 		splitPane.setOneTouchExpandable(true);

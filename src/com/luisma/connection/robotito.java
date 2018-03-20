@@ -9,7 +9,7 @@ public class robotito {
 
 		System.out.println(miApi.getSegmentos());
 		System.out.println(miApi.getInstrumentos());
-		System.out.println(miApi.getInstrumentosDetail("WTIMar18","ROFX"));
+		System.out.println(miApi.getInstrumentosDetail("DOMay18","ROFX"));
 
 		miApi.finalize();
 
