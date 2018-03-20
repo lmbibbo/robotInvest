@@ -40,7 +40,7 @@ public class Controller {
 	
 	private void initView() {
 		// TODO Auto-generated method stub
-		view.getMyTextField().setText(String.valueOf(model.getCounter()));
+		view.getTopPane().getMyTextField().setText(String.valueOf(model.getCounter()));
 	}
 
 	public void initController() {
@@ -57,8 +57,8 @@ public class Controller {
 
 	private Object decrementValue() {
 		model.decrementValue();
-		view.getMyTextField().setText(String.valueOf(model.getCounter()));
-		view.getMylist().getList().setEnabled(true);
+		view.getTopPane().getMyTextField().setText(String.valueOf(model.getCounter()));
+		view.getTopPane().getMylist().getList().setEnabled(true);
 		return null;
 	}
 	
@@ -73,7 +73,9 @@ public class Controller {
 			
 			int s = resp.getInstruments().size();
 			for(int i=0; i<s; i++){
-				view.getMylist().getModel().addElement(new CheckboxListItem(resp.getInstruments().get(i).getInstrumentId().getSymbol()));
+				if (resp.getInstruments().get(i).getInstrumentId().getMarketId().equals("ROFX")) {
+					view.getTopPane().getMylist().getModel().addElement(new CheckboxListItem(resp.getInstruments().get(i).getInstrumentId().getSymbol()));					
+				}
 			}
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
@@ -86,15 +88,14 @@ public class Controller {
 			e.printStackTrace();
 		}
 
-		
-		
-		view.getConect().setEnabled(false);
+//		view.getConect().setEnabled(false);
 	}
 
 	private Object incrementValue() {
 		model.incrementValue();
-		view.getMyTextField().setText(String.valueOf(model.getCounter()));
-		view.getMylist().getList().setEnabled(false);
+		view.getTopPane().getMyTextField().setText(String.valueOf(model.getCounter()));
+		view.getTopPane().repaint();
+//		view.getMylist().getList().setEnabled(false);
 		return null;
 	}
 }

@@ -1,64 +1,58 @@
 package testSwing;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
-import java.awt.Label;
-import java.awt.TextField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import com.luisma.view.CheckboxList;
-import com.luisma.view.CheckboxListItem;
+import javax.swing.JSplitPane;
 
 public class View {
 
+//	JScrollPane scrollPane;
+	private JFrame frame;
+	private JPanel panel;
+	
 	//attributes as must be visible within class
-	private TextField myTextField;
 	private Button button; 
 	private Button conect;
-	private JPanel panel_1;
-	private JPanel panel_2;
-	private JPanel panel_3;
-	private CheckboxList mylist;
+	
+	private TopPanel topPane;
 
 	View() {
 		System.out.println("View()");	
 
 		//frame in constructor and not an attribute as doesn't need to be visible to whole class
-		JFrame frame 		= new JFrame("simple MVC");
-		frame.getContentPane().add("North", new Label("counter"));
+		frame 		= new JFrame("simple MVC");
 
-		panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BorderLayout(0, 0));
-
-		panel_2 = new JPanel();
-		panel_1.add(panel_2, BorderLayout.WEST);
-		panel_2.setLayout(new BorderLayout(0, 0));
-
-		mylist = new CheckboxList();
-	
-		panel_2.add(mylist.getList(), BorderLayout.CENTER);
-		panel_3 = new JPanel();
-		panel_1.add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new BorderLayout(0, 0));
-
-		myTextField 		= new TextField();
-		panel_3.add(myTextField, BorderLayout.CENTER);
-		myTextField.setColumns(5);
+		topPane = new TopPanel();
+		JSplitPane top = topPane.getSplitPane();
+		top.setBorder(null);
 
 		//panel in constructor and not an attribute as doesn't need to be visible to whole class
-		JPanel panel 		= new JPanel();
+		panel 		= new JPanel();
 		button	 		= new Button("PressMe");
 		panel.add(button);
-		frame.getContentPane().add("South", panel);		
-
+		
 		conect = new Button("Connect");
 		conect.setActionCommand("Connect");
 		panel.add(conect);
+		
+        //Create a split pane and put "top" (a split pane)
+        //and JLabel instance in it.
+        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                                              top, panel);
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(300);
+ 
+        //Provide minimum sizes for the two components in the split pane
+//        top.setMinimumSize(new Dimension(200, 150));
+//        panel.setMinimumSize(new Dimension(30, 30));
+ 				
+		frame.setContentPane(splitPane);	
+        frame.pack();
+        frame.setVisible(true);
 
 		frame.addWindowListener(new CloseListener());	
 		frame.setSize(500,400);
@@ -74,9 +68,6 @@ public class View {
 		} //windowClosing()
 	} //CloseListener
 
-	public TextField getMyTextField() {
-		return myTextField;
-	}
 
 	public Button getButton() {
 		return button;
@@ -86,8 +77,8 @@ public class View {
 		return conect;
 	}
 
-	public CheckboxList getMylist() {
-		return mylist;
+	public TopPanel getTopPane() {
+		return topPane;
 	}
 
 }
